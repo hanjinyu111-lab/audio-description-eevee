@@ -3,19 +3,20 @@
 <body style="text-align:center;font-family:Arial;margin-top:120px;">
 
 <h2>Audio Description</h2>
+<p>Tap anywhere to start audio</p>
 
-<button onclick="playAudio()" style="font-size:24px;padding:20px 40px;">
-▶ Play Audio
-</button>
-
-<audio id="audio">
+<audio id="audio" preload="auto">
   <source src="audio.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function playAudio() {
-  document.getElementById("audio").play();
-}
+const audio = document.getElementById("audio");
+
+document.addEventListener("click", function () {
+  audio.play().catch(function(error){
+    console.log("Playback failed:", error);
+  });
+}, { once: true });
 </script>
 
 </body>
