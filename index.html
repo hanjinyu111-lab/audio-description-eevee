@@ -11,15 +11,25 @@ body {
   background: black;
   color: white;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: Arial, sans-serif;
   text-align: center;
+  user-select: none;
 }
 
-#text {
-  font-size: 6vw;
+/* 标题 */
+#title {
+  font-size: 7vw;
   font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* 提示文字 */
+#text {
+  font-size: 5vw;
+  opacity: 0.8;
 }
 </style>
 
@@ -27,7 +37,13 @@ body {
 
 <body>
 
-<div id="text">TAP TO PLAY</div>
+<div id="title">
+  Audio Description - bone, stone, voice alone
+</div>
+
+<div id="text">
+  TAP TO PLAY
+</div>
 
 <audio id="audio" preload="auto">
   <source src="audio.mp3" type="audio/mpeg">
@@ -50,9 +66,13 @@ function toggleAudio() {
   }
 }
 
-// 支持手机和电脑
-document.addEventListener("click", toggleAudio);
-document.addEventListener("touchstart", toggleAudio);
+// 轻触触发（最顺滑）
+document.addEventListener("pointerdown", toggleAudio);
+
+// 播放结束
+audio.addEventListener("ended", () => {
+  text.innerHTML = "FINISHED<br>Tap to replay";
+});
 </script>
 
 </body>
