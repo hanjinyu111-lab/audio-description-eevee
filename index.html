@@ -19,11 +19,19 @@ body {
   user-select: none;
 }
 
-/* 标题 */
+/* 第一行：Audio Description */
+#subtitle {
+  font-size: 4vw;
+  margin-bottom: 10px;
+  opacity: 0.85;
+}
+
+/* 第二行：作品名（更大 + 斜体） */
 #title {
   font-size: 7vw;
+  font-style: italic;
   font-weight: bold;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 /* 提示文字 */
@@ -37,8 +45,12 @@ body {
 
 <body>
 
+<div id="subtitle">
+  Audio Description
+</div>
+
 <div id="title">
-  Audio Description - bone, stone, voice alone
+  Bone, Stone, Voice Alone
 </div>
 
 <div id="text">
@@ -66,7 +78,7 @@ function toggleAudio() {
   }
 }
 
-// 轻触触发（最顺滑）
+// 轻触触发
 document.addEventListener("pointerdown", toggleAudio);
 
 // 播放结束
