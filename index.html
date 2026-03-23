@@ -18,9 +18,8 @@ body {
 }
 
 #text {
-  font-size: 40px;   /* ⭐ 这里放大字体 */
-  font-weight: bold; /* 更清晰 */
-  padding: 20px;
+  font-size: 6vw;
+  font-weight: bold;
 }
 </style>
 
@@ -28,7 +27,7 @@ body {
 
 <body>
 
-<div id="text">Tap anywhere to start audio</div>
+<div id="text">TAP TO PLAY</div>
 
 <audio id="audio" preload="auto">
   <source src="audio.mp3" type="audio/mpeg">
@@ -38,17 +37,22 @@ body {
 const audio = document.getElementById("audio");
 const text = document.getElementById("text");
 
-function startAudio() {
-  audio.play().then(() => {
-    text.innerHTML = "Playing...";
-  }).catch(err => {
-    text.innerHTML = "Tap again to play";
-    console.log("Playback failed:", err);
-  });
+function toggleAudio() {
+  if (audio.paused) {
+    audio.play().then(() => {
+      text.innerHTML = "PLAYING...<br>Tap to pause";
+    }).catch(err => {
+      console.log("Playback failed:", err);
+    });
+  } else {
+    audio.pause();
+    text.innerHTML = "PAUSED<br>Tap to play";
+  }
 }
 
-document.addEventListener("click", startAudio, { once: true });
-document.addEventListener("touchstart", startAudio, { once: true });
+// 支持手机和电脑
+document.addEventListener("click", toggleAudio);
+document.addEventListener("touchstart", toggleAudio);
 </script>
 
 </body>
